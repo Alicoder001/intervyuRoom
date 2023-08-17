@@ -1,0 +1,12 @@
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import cors from 'cors';
+import { userRouter } from './routes/user.routes.js';
+import { auth } from './middleware/auth.js';
+import { roomRouter } from './routes/room.routes.js';
+export const app = express();
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
+app.use('/user', userRouter);
+app.use('/room', auth, roomRouter);
